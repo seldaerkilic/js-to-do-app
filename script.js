@@ -10,6 +10,8 @@
 
     // let's query the DOM for the ul element and save it within a variable
     const ulElement = document.querySelector('ul');
+
+    
     
 // 2- Attach a submit event listener to the form element.
     // Pass in 2 arguments to the event listener method:
@@ -24,7 +26,8 @@
 
     // Save the entered text value from the input within a variable
         // NOTE: any info entered into a input element will always be available at the value property.
-    const userToDo = inputElement.value;
+    const userToDo = inputElement.value.trim();
+    console.log(userToDo);
 
     // NOTE: Form inputs ALWAYS return the value as string
         // if the user submits the form without entering anything, that returns an empty string
@@ -59,4 +62,27 @@
 
 
 // 3- TO THINK ABOUT LATER:: How do we track when the task is done?
-// STRETCH ERROR-HANDLING GOAL: how do we avoid adding empty strings with multiple space characters (probably RegEx)
+
+    // ckecked ckeckbox:   <i class="fa-regular fa-square-check"></i>
+
+    // query the DOM for our icon and save the returned DOM node within a variable
+    // This won't work because there is no icon element on the page until user submit input. So we need to attach event listener to the existing parent element which is ul.
+    // const iconElement = document.querySelector('i');
+
+    
+    // add a click eventListener and attach it to our icon
+        // we can use the event object to find out exactly where the event occured and hone it on that specific icon!
+    ulElement.addEventListener('click', function(event){
+
+        // only when the icon is clicked do we want to update the checkbox to be unchecked!
+        // isolate where the click event occurs - ONLY if it occurs on the icon do we want to run the code to update "checking the checkbox" (AKA updating the rendered FA icon)
+        if (event.target.tagName === 'I'){
+
+            const iElement = event.target;
+            console.log(iElement);
+
+            // toggle the fontawesome icon class so that if it's checked it should be unchecked and vice versa!
+            iElement.classList.toggle('fa-square');
+            iElement.classList.toggle('fa-square-check');
+        }
+    })
